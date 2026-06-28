@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Comment": {
+      "title": "Comment",
+      "description": "A comment left on a complaint by a citizen or authority.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique comment ID." },
+        "authorEmail": { "type": "string", "format": "email", "description": "Email address of the comment author." },
+        "authorName": { "type": "string", "description": "Name of the comment author." },
+        "text": { "type": "string", "description": "Content of the comment." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the comment was created." }
+      },
+      "required": ["id", "authorEmail", "authorName", "text", "createdAt"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "A civic issue reported by a citizen.",
+      "type": "object",
+      "properties": {
+        "category": { "type": "string", "description": "Category of the issue (e.g., Pothole, Broken Streetlight)." },
+        "description": { "type": "string", "description": "Detailed description of the issue." },
+        "location": { "type": "string", "description": "Physical location or address of the issue." },
+        "imageUrl": { "type": "string", "description": "Base64 image data or URL of the issue." },
+        "severity": { "type": "string", "enum": ["Low", "Medium", "High", "Critical"], "description": "AI-evaluated severity." },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Urgent"], "description": "AI-evaluated priority." },
+        "confidence": { "type": "number", "description": "Confidence level of the AI analysis." },
+        "status": { "type": "string", "enum": ["Pending", "In Progress", "Resolved"], "description": "Current status of the complaint." },
+        "reporterEmail": { "type": "string", "format": "email", "description": "Email address of the reporter." },
+        "reporterName": { "type": "string", "description": "Name of the reporter." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the complaint was reported." },
+        "resolvedAt": { "type": "string", "format": "date-time", "description": "Timestamp when the complaint was resolved." },
+        "comments": {
+          "type": "array",
+          "description": "Comments thread.",
+          "items": { "$ref": "#/entities/Comment" }
+        }
+      },
+      "required": ["category", "description", "location", "severity", "priority", "confidence", "status", "reporterEmail", "reporterName", "createdAt"]
+    }
+  },
+  "firestore": {
+    "complaints": {
+      "schema": "Complaint",
+      "description": "Collection of all reported civic complaints and issues."
+    }
+  }
+}

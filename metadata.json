@@ -1,0 +1,10 @@
+{
+  "name": "CommunityHeroAI",
+  "description": "An AI-powered civic issue reporting platform helping citizens report municipal complaints like potholes, broken lights, and garbage.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
